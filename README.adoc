@@ -14,6 +14,18 @@
 
 You can use the Helm charts to deploy services on Kubernetes for development, test, and proof of concept environments.
 
+# helm template confluent  . > cp-kafka-base.yaml
+
+kustomize edit add resource cp-kafka-base.yaml
+
+add:
+patchesStrategicMerge:
+- cp-kafka-patch.yaml
+
+happy kustomizing!
+
+
+
 CAUTION: Open Source Helm charts are not supported by Confluent.
 
 *If you want to use Confluent Platform on Kubernetes in a test or production environment, follow these instructions to install https://docs.confluent.io/current/installation/operator/index.html#operator-about-intro[Confluent Operator].*
