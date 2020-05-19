@@ -1,0 +1,6 @@
+commonLabels:
+  my-label: dev-kafka
+resources:
+- cp-kafka-base.yaml
+patchesStrategicMerge:
+- cp-kafka-patch.yaml

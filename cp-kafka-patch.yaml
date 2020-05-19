@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: confluent-cp-kafka-connect
+spec:
+  template:
+    spec:
+      containers:
+      - name: cp-kafka-connect-server
+        # volumeMounts:
+        #   - name: jmx-config
+        #     mountPath: /etc/jmx-kafka-connect
+        volumeMounts:
+        - name: custom-connector-libs
+          mountPath: /usr/share/java/kafka-connect-jdbc/mysql-connector-java-5.1.6.jar
+        env:
+          - name: CONNECT_PLUGIN_PATH
+            value: /usr/share/java,/usr/share/confluent-hub-components,/usr/local/share/kafka/plugins
+      volumes:
+      - name: custom-connector-libs
+        hostPath:
+          # directory location on host
+          path: /host_mnt/c/develop/kube/confulent-kustom/cp-helm-charts/custom-connector-libs/mysql-connector-java-5.1.6.jar
+          type: File
