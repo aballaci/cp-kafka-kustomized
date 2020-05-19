@@ -14,13 +14,23 @@
 
 You can use the Helm charts to deploy services on Kubernetes for development, test, and proof of concept environments.
 
-# helm template confluent  . > cp-kafka-base.yaml
-
+You can customize the helm charts like this:
+----
+helm template confluent  . > cp-kafka-base.yaml
 kustomize edit add resource cp-kafka-base.yaml
-
+----
 add:
 patchesStrategicMerge:
 - cp-kafka-patch.yaml
+
+added a custom hostvolume in windows with the mysql driver jar.
+mounted it under /usr/share/java/kafka-connect-jdbc
+
+and also added the custom plugin folder in classpath: /usr/local/share/kafka/plugins
+
+that has to be mounted in the same way...
+
+watch out /host_mnt/c/ for a windows hostvolume to work!
 
 happy kustomizing!
 
